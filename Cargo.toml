@@ -7,5 +7,3 @@ version = "0.1.0"
 [dependencies]
 linux-embedded-hal = "0.3.0"
 embedded-hal = "0.2.3"
-apds9306-rs = { git = "https://github.com/arnstein/apds9306-rs" }
-
