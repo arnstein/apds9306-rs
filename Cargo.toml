@@ -1,0 +1,16 @@
+[package]
+name = "apds9306"
+authors = ["Arnstein Kleven <arnsteinkleven@gmail.com>"]
+edition = "2018"
+version = "0.1.0"
+
+include = [
+    "src/lib.rs",
+    "src/register.rs",
+    "Cargo.toml",
+    "README.md"
+    ]
+
+[dependencies]
+linux-embedded-hal = "0.3.0"
+embedded-hal = "0.2.3"
