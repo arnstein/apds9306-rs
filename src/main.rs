@@ -1,16 +1,17 @@
 use linux_embedded_hal::{I2cdev};
 use std::thread;
 use std::time::Duration;
-mod lib;
+use apds9306_rs;
+
 
 fn main() {
 
     let i2c = I2cdev::new("/dev/i2c-31").unwrap();
-    let mut apds = Apds9306::new(i2c, 0x52).unwrap();
+    let mut apds = lib::Apds9306::new(i2c, 0x52).unwrap();
 
     loop {
-        let acceleration = apds.read_accel_bytes().unwrap();
-        println!("{:?}", acceleration);
+        let light = apds.read_light_bytes().unwrap();
+        println!("{:?}", light);
         thread::sleep(Duration::from_millis(200));
     }
 }
