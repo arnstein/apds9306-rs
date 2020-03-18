@@ -45,12 +45,12 @@ where
             .and(Ok(data[0]))
     }
 
-    pub fn read_light_bytes(&mut self) -> Result<[u8;6], Error<E>> {
-        let mut data = [0u8;6];
+    pub fn read_light_bytes(&mut self) -> Result<u32, Error<E>> {
+        let mut data = [0u8;3];
         self.i2c
-            .write_read(self.address, &[Register::LIGHT_L.addr() | 0x80], &mut data)
-            .map_err(Error::I2C)
-            .and(Ok(data))
+            .write_read(self.address, &[Register::LIGHT_L.addr()], &mut data)
+            .map_err(Error::I2C)?;
+        Ok(data[0] as u32 | (data[1] as u32) << 8 | (data[2] as u32) << 16)
     }
 
     pub fn write_register(&mut self, register: Register, value: u8) -> Result<(), Error<E>> {
