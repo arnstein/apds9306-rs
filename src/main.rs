@@ -14,7 +14,7 @@ fn main() {
 
     loop {
         for apds in &mut apdses {
-            let light = apds.read_light_bytes().unwrap();
+            let light = apds.read_light_value().unwrap();
             print!("{:6}  ", light);
         }
         println!();

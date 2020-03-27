@@ -45,11 +45,15 @@ where
             .and(Ok(data[0]))
     }
 
-    pub fn read_light_bytes(&mut self) -> Result<u32, Error<E>> {
+    pub fn read_light_bytes(&mut self) -> Result<[u8;3], Error<E>> {
         let mut data = [0u8;3];
         self.i2c
             .write_read(self.address, &[Register::LIGHT_L.addr()], &mut data)
             .map_err(Error::I2C)?;
+        Ok(data)
+    }
+    pub fn read_light_value(&mut self) -> Result<u32, Error<E>> {
+        let data = self.read_light_bytes()?;
         Ok(data[0] as u32 | (data[1] as u32) << 8 | (data[2] as u32) << 16)
     }
 
